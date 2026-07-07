@@ -1,5 +1,7 @@
 # Software Estimator Skill
 
+English | [中文](README.zh-CN.md)
+
 `software-estimator` is a Codex Skill for software development effort estimation and customer quotation. It reads requirements from documents, spreadsheets, images, or chat descriptions, decomposes the scope into functions, estimates multi-terminal effort, and generates a Chinese Excel workbook with quotation, Buff time, risks, assumptions, and customer confirmation questions.
 
 ## Use Cases
