@@ -44,7 +44,7 @@ software-estimator/
 1. Read the requirement source.
 2. Identify the business domain.
 3. Identify included terminals: iOS, Android, Web admin, H5, mini program, PC Web, open API, and backend.
-4. Ask prerequisite questions: person-day price, role-specific prices, project mode, standard-product base, and existing system scope.
+4. Ask mandatory prerequisite questions: unified person-day price or role-specific prices, quotation coefficient, project mode, included terminals, standard-product base, and existing system scope.
 5. Split first-level modules and second-level functions.
 6. Split internal implementation details.
 7. Classify standard-product coverage.
@@ -65,6 +65,8 @@ The default workbook contains 5 sheets:
 - `客户确认问题`: customer questions and their effort impact.
 
 ## Estimation Model
+
+There is no default person-day price. The skill must not reuse the `1200 CNY/person-day` sample value unless the user explicitly provides it in the current task. The skill may suggest a quotation coefficient of `1.2`, but it must ask the user before applying it.
 
 Base formula:
 
@@ -140,4 +142,3 @@ Sample workbook:
 ```text
 outputs/software-estimator-sample.xlsx
 ```
-

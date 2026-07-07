@@ -71,6 +71,33 @@ def validate_estimate(data: dict[str, Any]) -> list[str]:
         errors.append("functions must be a non-empty list")
         return errors
 
+    pricing = data.get("pricing", {})
+    if not isinstance(pricing, dict):
+        errors.append("pricing must be an object")
+    else:
+        pricing_mode = pricing.get("pricing_mode")
+        person_day_price = pricing.get("person_day_price")
+        role_prices = pricing.get("role_prices", {})
+        if pricing_mode == "unified":
+            if not _is_number(person_day_price) or person_day_price <= 0:
+                errors.append("pricing.person_day_price must be a positive number in unified pricing mode")
+        elif pricing_mode == "role_based":
+            if not isinstance(role_prices, dict) or not role_prices:
+                errors.append("pricing.role_prices must be a non-empty object in role_based pricing mode")
+            else:
+                invalid_roles = [
+                    role for role, price in role_prices.items()
+                    if not isinstance(role, str) or not _is_number(price) or price <= 0
+                ]
+                if invalid_roles:
+                    errors.append("pricing.role_prices contains invalid role prices")
+        else:
+            errors.append("pricing.pricing_mode must be unified or role_based")
+
+        coefficient = pricing.get("quotation_coefficient")
+        if not _is_number(coefficient) or coefficient <= 0:
+            errors.append("pricing.quotation_coefficient must be a positive number confirmed by the user")
+
     project_terminals = data.get("project", {}).get("included_terminals", [])
     if not isinstance(project_terminals, list):
         errors.append("project.included_terminals must be a list")

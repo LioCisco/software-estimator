@@ -29,8 +29,8 @@
 ## pricing
 
 - `pricing_mode`: unified / role_based
-- `person_day_price`: 统一人天单价
-- `quotation_coefficient`: 报价系数，默认 1.2
+- `person_day_price`: 统一人天单价；生成报价金额前必须由用户明确提供
+- `quotation_coefficient`: 报价系数；可建议 1.2，但必须经用户确认
 - `role_prices`: 角色单价映射，可为空
 - `currency`: 默认 CNY
 
