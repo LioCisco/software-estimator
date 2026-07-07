@@ -1,0 +1,6 @@
+interface:
+  display_name: "软件工时评估"
+  short_description: "从需求拆分功能并生成工时报价Excel"
+  default_prompt: "Use $software-estimator to read requirements, estimate effort by terminal, and generate a Chinese quotation Excel workbook."
+policy:
+  allow_implicit_invocation: true

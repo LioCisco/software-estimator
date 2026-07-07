@@ -1,0 +1,147 @@
+{
+  "project": {
+    "name": "会员商城估算样例",
+    "business_domain": "电商",
+    "scope": "管理后台 Web、小程序、H5 的商品、订单和售后核心功能",
+    "included_terminals": ["管理后台Web", "H5", "小程序", "服务端"],
+    "estimation_mode": "标品二开",
+    "excluded_scope": "ERP 对接、自动对账、优惠券暂不包含",
+    "key_assumptions": [
+      "商品和会员基于标品部分覆盖",
+      "支付退款流程按定开估算",
+      "UI 使用现有模板轻度调整"
+    ]
+  },
+  "pricing": {
+    "pricing_mode": "unified",
+    "person_day_price": 1200,
+    "quotation_coefficient": 1.2,
+    "role_prices": {},
+    "currency": "CNY"
+  },
+  "summary": {
+    "base_total_days": 24.5,
+    "buff_total_days": 3.0,
+    "final_total_days": 27.5,
+    "average_buff_percent": 0.1224,
+    "buff_reason_summary": "支付退款和库存扣减规则待确认，预留多端联调时间",
+    "internal_estimated_amount": 33000,
+    "customer_quotation_amount": 39600,
+    "project_level_buff_applied": false
+  },
+  "functions": [
+    {
+      "module": "商品",
+      "function": "商品管理",
+      "description": "商品新增编辑、SKU、多图、上下架",
+      "included_terminals": ["管理后台Web", "H5", "小程序", "服务端"],
+      "coverage_mode": "部分覆盖",
+      "coverage_evidence": "用户确认",
+      "complexity": "H",
+      "risk_level": "中",
+      "product_days": 1.0,
+      "ui_days": 0.5,
+      "ios_days": 0,
+      "android_days": 0,
+      "web_admin_days": 2.0,
+      "h5_days": 1.0,
+      "mini_program_days": 1.0,
+      "pc_web_days": 0,
+      "frontend_subtotal_days": 4.0,
+      "backend_days": 3.0,
+      "test_days": 1.5,
+      "project_management_days": 0.5,
+      "base_total_days": 10.5,
+      "buff_percent": 0.1,
+      "buff_days": 1.0,
+      "buff_reason": "SKU、库存扣减规则待确认",
+      "final_total_days": 11.5,
+      "quotation_amount": 16560,
+      "notes": "按标品部分覆盖估算"
+    },
+    {
+      "module": "订单",
+      "function": "下单与支付",
+      "description": "购物车、下单、微信支付、订单列表、订单详情",
+      "included_terminals": ["H5", "小程序", "服务端"],
+      "coverage_mode": "全部定开",
+      "coverage_evidence": "行业知识库推断",
+      "complexity": "H",
+      "risk_level": "高",
+      "product_days": 1.5,
+      "ui_days": 0.5,
+      "ios_days": 0,
+      "android_days": 0,
+      "web_admin_days": 0,
+      "h5_days": 2.0,
+      "mini_program_days": 2.0,
+      "pc_web_days": 0,
+      "frontend_subtotal_days": 4.0,
+      "backend_days": 5.0,
+      "test_days": 2.5,
+      "project_management_days": 0.5,
+      "base_total_days": 14.0,
+      "buff_percent": 0.14,
+      "buff_days": 2.0,
+      "buff_reason": "支付、退款、对账流程未完全确认",
+      "final_total_days": 16.0,
+      "quotation_amount": 23040,
+      "notes": "需客户确认支付退款边界"
+    }
+  ],
+  "implementation_details": [
+    {
+      "module": "商品",
+      "function": "商品管理",
+      "item_type": "页面",
+      "item_name": "商品编辑页",
+      "terminal_type": "管理后台Web",
+      "role": "Web前端",
+      "base_days": 2.0,
+      "coverage_coefficient": 0.6,
+      "complexity_coefficient": 1.4,
+      "risk_coefficient": 1.1,
+      "final_base_days": 1.8,
+      "estimation_evidence": "电商知识库商品管理基准",
+      "pending_confirmation": "SKU 规格数量和库存规则"
+    },
+    {
+      "module": "订单",
+      "function": "下单与支付",
+      "item_type": "第三方集成",
+      "item_name": "微信支付",
+      "terminal_type": "服务端",
+      "role": "后端",
+      "base_days": 3.0,
+      "coverage_coefficient": 1.0,
+      "complexity_coefficient": 1.4,
+      "risk_coefficient": 1.3,
+      "final_base_days": 5.5,
+      "estimation_evidence": "电商知识库订单支付基准",
+      "pending_confirmation": "退款、回调、对账规则"
+    }
+  ],
+  "risks": [
+    {
+      "category": "支付对账",
+      "description": "退款、回调和对账规则未明确",
+      "affected_module": "订单",
+      "risk_level": "高",
+      "day_impact": "2-4人天",
+      "suggested_handling": "报价前确认退款和对账边界",
+      "included_in_quotation": "是"
+    }
+  ],
+  "confirmation_questions": [
+    {
+      "category": "库存",
+      "related_module": "商品",
+      "question": "库存是否参与下单扣减，是否需要和 ERP 对接？",
+      "why_it_matters": "库存扣减和外部系统联动会影响订单、商品和售后工时",
+      "effort_impact_range": "2-6人天",
+      "default_assumption": "先按本系统内库存扣减估算，不含 ERP 对接",
+      "customer_answer": "",
+      "affects_quotation": "是"
+    }
+  ]
+}
